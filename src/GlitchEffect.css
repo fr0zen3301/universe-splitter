@@ -1,0 +1,127 @@
+    .glitch-text-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+    /* TEST */
+    .glitch-text-main,
+    .glitch-text-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: white;
+      /* Example color */
+      text-shadow: 2px 2px 0px red, -2px -2px 0px blue;
+      /* Chromatic aberration */
+    }
+
+    .glitch-text-layer {
+      animation: glitch-animation 0.5s infinite alternate;
+    }
+
+    @keyframes glitch-animation {
+      0% {
+        transform: translate(0, 0);
+        clip-path: inset(0 0 0 0);
+      }
+
+      20% {
+        transform: translate(-5px, 5px);
+        clip-path: inset(10% 0 10% 0);
+      }
+
+      40% {
+        transform: translate(5px, -5px);
+        clip-path: inset(20% 0 20% 0);
+      }
+
+      60% {
+        transform: translate(-3px, 3px);
+        clip-path: inset(30% 0 30% 0);
+      }
+
+      80% {
+        transform: translate(3px, -3px);
+        clip-path: inset(40% 0 40% 0);
+      }
+
+      100% {
+        transform: translate(0, 0);
+        clip-path: inset(0 0 0 0);
+      }
+    }
+
+    .glitch-box {
+      width: 700px;
+      height: 675px;
+      border: 3px solid white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* 1st glitch layer */
+    .glitch-box::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 3px solid white;
+      animation: glitch1 1.8s infinite;
+      mix-blend-mode: difference;
+    }
+
+    /* 2nd glitch layer */
+    .glitch-box::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 3px solid white;
+      animation: glitch2 2.4s infinite;
+      mix-blend-mode: difference;
+    }
+
+    @keyframes glitch1 {
+      0% {
+        transform: translate(0, 0);
+        opacity: 0.3;
+      }
+
+      20% {
+        transform: translate(-2px, 2px);
+      }
+
+      40% {
+        transform: translate(2px, -2px);
+      }
+
+      60% {
+        transform: translate(-1px, -1px);
+      }
+
+      100% {
+        transform: translate(0, 0);
+        opacity: 0.2;
+      }
+    }
+
+    @keyframes glitch2 {
+      0% {
+        transform: translate(0, 0);
+        opacity: 0.3;
+      }
+
+      20% {
+        transform: translate(2px, -1px);
+      }
+
+      40% {
+        transform: translate(-2px, 1px);
+      }
+
+      60% {
+        transform: translate(1px, 1px);
+      }
+
+      100% {
+        transform: translate(0, 0);
+        opacity: 0.2;
+      }
+    }
