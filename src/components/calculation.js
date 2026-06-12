@@ -7,8 +7,9 @@
 // into one number with SHA-256. The output is unpredictable as long as ANY single
 // source is good — that's what "combine to maximize entropy and reliability" means.
 //
-// Sources (all routed through Vite's dev proxy so CORS can't block them, and so
-// keys stay server-side — see vite.config.js):
+// Sources are routed through a same-origin proxy so CORS can't block them and
+// keys stay server-side: the Vite proxy in dev (vite.config.js), and Cloudflare
+// Pages Functions in production (functions/).
 //   * quantum vacuum  - qrandom.io            (vacuum fluctuations; keyless)  [QUANTUM]
 //   * ANU             - quantumnumbers.anu...  (vacuum; needs free API key)   [QUANTUM]
 //   * NIST beacon     - beacon.nist.gov        (signed gov beacon; keyless)
@@ -23,13 +24,15 @@
 // -----------------------------------------------------------------------------
 
 const TIMEOUT_MS = 3500;
-const DEV = import.meta.env.DEV;
 
+// Same-origin proxy paths. In dev these are served by the Vite proxy
+// (vite.config.js); in production by Cloudflare Pages Functions (functions/).
+// Either way the browser only talks to our own origin, so CORS never applies.
 const BASE = {
-  qrng: DEV ? "/qrng" : "https://qrandom.io",
-  nist: DEV ? "/nist" : "https://beacon.nist.gov",
-  inmetro: DEV ? "/inmetro" : "https://beacon.inmetro.gov.br",
-  anu: DEV ? "/anu" : "https://api.quantumnumbers.anu.edu.au",
+  qrng: "/qrng",
+  nist: "/nist",
+  inmetro: "/inmetro",
+  anu: "/anu",
 };
 
 // fetch with an abort-based timeout so one slow source can't hold up the mix.
