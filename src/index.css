@@ -1,6 +1,6 @@
 @font-face{
   font-family: 'Frozen';
-  src: url("/src/assets/fonts/font.otf") format('truetype')
+  src: url("./assets/fonts/font.otf") format('opentype')
 }
 
 @tailwind base;
@@ -15,10 +15,12 @@
     animation background: Effect as if you are inside a wave function
 */
 #bg {
-  height: 100vh;
+  height: 100vh;   /* fallback for very old browsers */
+  height: 100dvh;  /* dynamic viewport: tracks Android's collapsing toolbar */
   overflow: hidden;
   background: radial-gradient(circle at 50% 50%, #0A0F1F 0%, #02030A 70%, #000000 100%);
-  animation: pulse 8s infinite alternate;
+  /* Background is now static. To bring back the gentle breathing effect,
+     restore: animation: pulse 8s infinite alternate; */
 }
 
 /* faint double-slit interference fringes, slowly drifting */

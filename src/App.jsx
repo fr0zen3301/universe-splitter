@@ -5,6 +5,7 @@ import OptionInput from "./components/OptionInput";
 import InfoButton from "./components/InfoButton";
 import EditableOption from "./components/EditableOption";
 import WeightInput from "./components/WeightInput";
+import WaveBackground from "./components/WaveBackground";
 import InfoModal from "./components/InfoModal";
 import { splitUniverse } from "./components/calculation";
 
@@ -75,8 +76,8 @@ const App = () => {
   }, [busy, option1, option2]);
 
   return (<>
-    <div className="w-screen min-h-screen flex flex-col items-center justify-center bg-black py-6">
-      <div id="bg" className="absolute inset-0 z-0"></div>
+    <div className="w-full min-h-dvh flex flex-col items-center justify-center bg-black py-6">
+      <WaveBackground />
 
       <div className="relative z-10 flex flex-col items-center">
         <div className="glitch-box relative">

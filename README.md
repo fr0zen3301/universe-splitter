@@ -43,7 +43,6 @@ always know exactly what produced your answer.
 - `vite.config.js` - dev server proxy (mirrors the functions in development)
 
 ## Running locally
-
 ```
 npm install
 npm run dev
