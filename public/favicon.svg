@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <radialGradient id="wfbg" cx="50%" cy="45%" r="75%">
+      <stop offset="0%" stop-color="#0E1426"/>
+      <stop offset="70%" stop-color="#05070F"/>
+      <stop offset="100%" stop-color="#02030A"/>
+    </radialGradient>
+  </defs>
+  <rect x="1.5" y="1.5" width="61" height="61" rx="14"
+        fill="url(#wfbg)" stroke="#ffffff" stroke-opacity="0.25" stroke-width="1.5"/>
+  <!-- quantum wave packet: a sine wave under a bell-shaped envelope -->
+  <path d="M 4 32 L 8 32 Q 12 24 16 32 Q 20 50 24 32 Q 28 2 32 32 Q 36 62 40 32 Q 44 14 48 32 Q 52 40 56 32 L 60 32"
+        fill="none" stroke="#ffffff" stroke-width="3.2"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
