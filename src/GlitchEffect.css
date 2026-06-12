@@ -51,11 +51,20 @@
     }
 
     .glitch-box {
-      width: 700px;
+      width: min(700px, 92vw);
       height: 675px;
       border: 3px solid white;
       position: relative;
       overflow: hidden;
+    }
+
+    /* On phones/tablets, the box grows with its content instead of
+       forcing a fixed 700x675 that overflows small screens. */
+    @media (max-width: 760px) {
+      .glitch-box {
+        height: auto;
+        min-height: 0;
+      }
     }
 
     /* split / measurement animation */

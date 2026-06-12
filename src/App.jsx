@@ -75,7 +75,7 @@ const App = () => {
   }, [busy, option1, option2]);
 
   return (<>
-    <div className="w-screen h-screen flex flex-col items-center justify-center bg-black">
+    <div className="w-screen min-h-screen flex flex-col items-center justify-center bg-black py-6">
       <div id="bg" className="absolute inset-0 z-0"></div>
 
       <div className="relative z-10 flex flex-col items-center">
@@ -84,7 +84,7 @@ const App = () => {
           <div className="relative z-10 flex flex-col items-center justify-center h-full pt-[25px]">
             <div className="font-frozen text-5xl text-white p-[px]">
               <FuzzyText
-                fontSize="3.3rem"
+                fontSize="clamp(1.3rem, 6.5vw, 3.3rem)"
                 baseIntensity={0.15}
                 hoverIntensity={0.25}
                 enableHover={true}
@@ -104,10 +104,10 @@ const App = () => {
                 </p>
                 <div className="flex flex-row items-end gap-6 mb-3">
                   <div className="flex-1"></div>
-                  <div className="w-[70px] text-center text-2xl">Weight</div>
+                  <div className="w-[70px] text-center text-lg sm:text-2xl">Weight</div>
                 </div>
 
-                <div className="flex flex-row items-end gap-6 mb-6 text-3xl">
+                <div className="flex flex-row items-end gap-6 mb-6 text-xl sm:text-3xl">
                   <div className="flex-1 min-w-0">
                     <OptionInput
                       value={option1}
@@ -120,7 +120,7 @@ const App = () => {
                   </div>
                 </div>
 
-                <div className="flex flex-row items-end gap-6 text-3xl">
+                <div className="flex flex-row items-end gap-6 text-xl sm:text-3xl">
                   <div className="flex-1 min-w-0">
                     <OptionInput
                       value={option2}
@@ -134,7 +134,7 @@ const App = () => {
                 </div>
               </div>
 
-              {/* Middle — measurement animation, then the result */}
+              {/* Middle, measurement animation, then the result */}
               <div className="flex-1 flex items-center justify-center text-center px-[20px] text-white font-frozen">
                 {busy ? (
                   <div>
@@ -163,7 +163,7 @@ const App = () => {
                 <button
                   onClick={handleSplit}
                   disabled={busy}
-                  className="border-2 border-white/70 px-12 py-3 text-2xl tracking-wide hover:bg-white hover:text-black transition-colors disabled:opacity-50"
+                  className="border-2 border-white/70 px-6 py-2.5 text-lg sm:px-12 sm:py-3 sm:text-2xl tracking-wide hover:bg-white hover:text-black transition-colors disabled:opacity-50"
                 >
                   {busy ? "SPLITTING..." : "SPLIT THE UNIVERSE"}
                 </button>
@@ -172,7 +172,7 @@ const App = () => {
           </div>
         </div>
 
-        {/* More Info — below the box, outside it */}
+        {/* More Info — below the box*/}
         <div className="font-frozen text-white mt-6 flex justify-center">
           <InfoButton onClick={() => setShowInfo(true)} />
         </div>
