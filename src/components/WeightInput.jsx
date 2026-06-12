@@ -5,11 +5,13 @@ const WeightInput = ({ value, onChange }) => {
         <input
         type="number"
         value={value}
-        min="0"
-        step="0.01"
-        onChange={ ( e ) => onChange(e.target.value)}
+        min="1"
+        step="1"
+        onChange={(e) => onChange(e.target.value)}
+        onFocus={(e) => e.target.select()}
         className="
-        w-[60px
+        w-[60px]
+        text-center
         bg-transparent
         border-b
         border-white/70

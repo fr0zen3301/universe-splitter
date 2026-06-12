@@ -58,6 +58,21 @@
       overflow: hidden;
     }
 
+    /* split / measurement animation */
+    @keyframes q-osc-a { 0%, 100% { opacity: 0.12; } 50% { opacity: 1; } }
+    @keyframes q-osc-b { 0%, 100% { opacity: 1; } 50% { opacity: 0.12; } }
+    @keyframes q-blink { 50% { opacity: 0; } }
+    @keyframes q-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .q-osc-a { animation: q-osc-a 1s ease-in-out infinite; }
+    .q-osc-b { animation: q-osc-b 1s ease-in-out infinite; }
+    .q-rise { animation: q-rise 0.45s ease-out; }
+    .q-cursor::after { content: "\25AE"; margin-left: 4px; animation: q-blink 1s steps(1) infinite; }
+
+    /* scramble / collapse animation */
+    .q-glitch { color: #9cc4ff; text-shadow: 2px 0 #ff3b6b, -2px 0 #3bd1ff; }
+    @keyframes q-pop { from { opacity: 0; transform: scale(1.18); } to { opacity: 1; transform: scale(1); } }
+    .q-pop { animation: q-pop 0.4s ease-out; }
+
     /* 1st glitch layer */
     .glitch-box::before {
       content: "";
@@ -66,6 +81,7 @@
       border: 3px solid white;
       animation: glitch1 1.8s infinite;
       mix-blend-mode: difference;
+      pointer-events: none;
     }
 
     /* 2nd glitch layer */
@@ -76,6 +92,7 @@
       border: 3px solid white;
       animation: glitch2 2.4s infinite;
       mix-blend-mode: difference;
+      pointer-events: none;
     }
 
     @keyframes glitch1 {

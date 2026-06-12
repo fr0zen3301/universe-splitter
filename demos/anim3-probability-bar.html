@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Design 3 — Probability Bar / Measurement</title>
+<style>
+  @font-face { font-family:'Frozen'; src:url("../src/assets/fonts/font.otf") format('opentype'); }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    font-family:'Frozen',sans-serif;color:#fff;
+    background:radial-gradient(circle at 50% 50%,#0A0F1F 0%,#02030A 70%,#000 100%);
+    display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;
+  }
+  body::before{
+    content:"";position:absolute;inset:-10%;pointer-events:none;
+    background:
+      repeating-linear-gradient(90deg,rgba(150,190,255,0.05) 0 1px,transparent 1px 10px),
+      repeating-linear-gradient(90deg,rgba(150,190,255,0.03) 0 1px,transparent 1px 23px);
+    animation:q-interfere 18s linear infinite;
+  }
+  @keyframes q-interfere{to{transform:translateX(10px);}}
+  .label{position:absolute;top:24px;left:0;right:0;text-align:center;font-size:13px;letter-spacing:3px;color:rgba(255,255,255,0.4);}
+  .stage{position:relative;z-index:1;width:620px;max-width:90vw;height:320px;border:2px solid rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;text-align:center;}
+  .bar{position:relative;display:flex;height:78px;border:2px solid rgba(255,255,255,0.4);overflow:hidden;}
+  .seg{display:flex;align-items:center;justify-content:center;font-size:17px;color:rgba(255,255,255,0.75);transition:background .25s,color .25s;padding:0 8px;}
+  .seg1{border-right:1px solid rgba(255,255,255,0.35);}
+  .seg.win{background:rgba(150,190,255,0.28);color:#fff;}
+  .needle{position:absolute;top:-6px;bottom:-6px;width:3px;background:#fff;left:0;box-shadow:0 0 10px #fff;}
+  .status{margin-top:24px;font-size:20px;letter-spacing:3px;color:rgba(255,255,255,0.7);}
+</style>
+</head>
+<body>
+<div class="label">DESIGN 3 — PROBABILITY BAR / MEASUREMENT</div>
+<div class="stage">
+  <div style="width:88%;">
+    <div class="bar" id="bar">
+      <div class="seg seg1" id="seg1"><span>Take a chance</span></div>
+      <div class="seg seg2" id="seg2"><span>Do not take a chance</span></div>
+      <div class="needle" id="needle"></div>
+    </div>
+    <div class="status" id="status">measuring</div>
+  </div>
+</div>
+<script>
+  const OPTIONS=["Take a chance","Do not take a chance"];
+  const W1=1,W2=1;                 // equal weights for the demo
+  const boundary=W1/(W1+W2);       // 0.5 split point
+  const seg1=document.getElementById('seg1');
+  const seg2=document.getElementById('seg2');
+  const needle=document.getElementById('needle');
+  const status=document.getElementById('status');
+  // size segments by weight
+  seg1.style.flex=W1; seg2.style.flex=W2;
+  function run(){
+    seg1.classList.remove('win');seg2.classList.remove('win');
+    status.textContent="measuring";
+    const finalPos=Math.random();
+    const start=performance.now();const dur=1900;
+    function tick(now){
+      const t=(now-start)/dur;
+      if(t<1){
+        const wobble=Math.sin(t*42)*(1-t)*0.5;
+        let p=Math.max(0,Math.min(1,finalPos+wobble));
+        needle.style.left=(p*100)+"%";
+        requestAnimationFrame(tick);
+      }else{
+        needle.style.left=(finalPos*100)+"%";
+        const leftWins=finalPos<=boundary;
+        (leftWins?seg1:seg2).classList.add('win');
+        status.textContent="\u2192 "+OPTIONS[leftWins?0:1];
+        setTimeout(run,1900);
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+  run();
+</script>
+</body>
+</html>

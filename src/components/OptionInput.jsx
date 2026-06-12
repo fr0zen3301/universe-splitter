@@ -6,6 +6,7 @@ const OptionInput = ({ value, onChange, placeholder}) => {
             type="text"
             value={value}
             onChange={onChange}
+            onFocus={(e) => e.target.select()}
             placeholder={placeholder}
             className="
             w-full 

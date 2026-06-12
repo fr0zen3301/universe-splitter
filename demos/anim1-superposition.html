@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Design 1 — Superposition / Decoherence</title>
+<style>
+  @font-face { font-family:'Frozen'; src:url("../src/assets/fonts/font.otf") format('opentype'); }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    font-family:'Frozen',sans-serif;color:#fff;
+    background:radial-gradient(circle at 50% 50%,#0A0F1F 0%,#02030A 70%,#000 100%);
+    display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;
+  }
+  body::before{
+    content:"";position:absolute;inset:-10%;pointer-events:none;
+    background:
+      repeating-linear-gradient(90deg,rgba(150,190,255,0.05) 0 1px,transparent 1px 10px),
+      repeating-linear-gradient(90deg,rgba(150,190,255,0.03) 0 1px,transparent 1px 23px);
+    animation:q-interfere 18s linear infinite;
+  }
+  @keyframes q-interfere{to{transform:translateX(10px);}}
+  .label{position:absolute;top:24px;left:0;right:0;text-align:center;font-size:13px;letter-spacing:3px;color:rgba(255,255,255,0.4);}
+  .stage{position:relative;z-index:1;width:620px;max-width:90vw;height:320px;border:2px solid rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;text-align:center;}
+  .hidden{display:none !important;}
+  .osc-a{font-size:34px;animation:osc-a 1s ease-in-out infinite;}
+  .osc-b{font-size:34px;margin-top:6px;animation:osc-b 1s ease-in-out infinite;}
+  @keyframes osc-a{0%,100%{opacity:.12}50%{opacity:1}}
+  @keyframes osc-b{0%,100%{opacity:1}50%{opacity:.12}}
+  .status{margin-top:28px;font-size:20px;letter-spacing:3px;color:rgba(255,255,255,0.7);}
+  .cursor::after{content:"\25AE";margin-left:4px;animation:blink 1s steps(1) infinite;}
+  @keyframes blink{50%{opacity:0}}
+  .small{font-size:20px;color:rgba(255,255,255,0.6);margin-bottom:8px;}
+  .big{font-size:42px;}
+  .result{animation:rise .45s ease-out;}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<div class="label">DESIGN 1 — SUPERPOSITION / DECOHERENCE</div>
+<div class="stage">
+  <div id="super">
+    <div class="osc-a">Take a chance</div>
+    <div class="osc-b">Do not take a chance</div>
+    <div class="status cursor" id="status">sampling the vacuum</div>
+  </div>
+  <div id="result" class="result hidden">
+    <div class="small">the universe chose</div>
+    <div class="big" id="winner">Take a chance</div>
+  </div>
+</div>
+<script>
+  const OPTIONS=["Take a chance","Do not take a chance"];
+  const PHRASES=["sampling the vacuum","amplifying the signal","decohering"];
+  const sup=document.getElementById('super');
+  const res=document.getElementById('result');
+  const statusEl=document.getElementById('status');
+  const winnerEl=document.getElementById('winner');
+  function run(){
+    sup.classList.remove('hidden');
+    res.classList.add('hidden');
+    let i=0;statusEl.textContent=PHRASES[0];
+    const cyc=setInterval(()=>{i=(i+1)%PHRASES.length;statusEl.textContent=PHRASES[i];},550);
+    setTimeout(()=>{
+      clearInterval(cyc);
+      sup.classList.add('hidden');
+      winnerEl.textContent=OPTIONS[Math.floor(Math.random()*2)];
+      res.classList.remove('hidden');
+      res.style.animation='none';void res.offsetWidth;res.style.animation='';
+      setTimeout(run,1900);
+    },2400);
+  }
+  run();
+</script>
+</body>
+</html>
