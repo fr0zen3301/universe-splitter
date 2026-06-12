@@ -1,9 +1,11 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
+import { cloudflare } from "@cloudflare/vite-plugin";
+
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), cloudflare()],
   server: {
     // All randomness sources are proxied through localhost so the browser's
     // CORS policy never applies, and so API keys stay server-side (never shipped
