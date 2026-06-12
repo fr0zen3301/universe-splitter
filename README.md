@@ -57,27 +57,6 @@ Note: `npm run preview` serves the production build but has no proxy, so it fall
 back to the non-quantum generator. That is only a local quirk. The deployed site
 has the proxy functions and works fully.
 
-## Deployment (Cloudflare Pages)
-
-The app is a static Vite build plus the serverless proxy functions in
-`functions/`. Cloudflare Pages serves both from one place.
-
-1. Push this repo to GitHub (branch `main`).
-2. In Cloudflare, open Pages and connect the GitHub repo.
-3. Build settings:
-   - Framework preset: Vite
-   - Build command: `npm run build`
-   - Build output directory: `dist`
-4. Optional, to activate the ANU quantum source: add an environment variable
-   `ANU_API_KEY` (Pages project, Settings, Environment variables) with a free key
-   from quantumnumbers.anu.edu.au. Without it, ANU is skipped and the other
-   sources still work.
-5. Deploy. You get a `*.pages.dev` URL with HTTPS already on.
-
-In development the proxy paths (`/qrng`, `/nist`, `/inmetro`, `/anu`, `/curby`)
-are handled by the Vite proxy; in production by the matching files in
-`functions/`. Same code path, no special cases.
-
 ## Privacy
 
 Nothing you type leaves your browser. The only network requests fetch random
