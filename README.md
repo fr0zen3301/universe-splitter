@@ -41,7 +41,6 @@ always know exactly what produced your answer.
 - `src/GlitchEffect.css`, `src/index.css` - box, background, and animation styles
 - `functions/` - Cloudflare Pages proxy functions (production)
 - `vite.config.js` - dev server proxy (mirrors the functions in development)
-- `DEPLOY.md` - full deployment guide
 
 ## Running locally
 
